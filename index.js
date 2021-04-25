@@ -8,7 +8,18 @@ console.log(`Server running on port ${PORT}`)
 
 app.get('/api', (request,response)=>{response.json(persons)})
 app.get('/info', (request,response)=>{response.send("<p>Phonebook has info for "+ persons.length + " persons</p>"+"<p>"+ new Date() +"</p>")})
-
+app.get('/api/persons/:id', (request,response)=>{
+    let filtro = persons.filter((persona)=>{if (persona.id == request.params.id) {
+        return true
+        
+    }})
+    if (filtro.length > 0) {
+        response.json(filtro)
+      } else {
+        response.status(404).end()
+        console.log("Hola")
+      }
+})
 
 
 
