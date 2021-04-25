@@ -35,8 +35,20 @@ app.post('/api/persons', (request,response)=>{
     const personas = request.body
     personas.id = number
     console.log(personas)
-    persons.push(personas)
-    response.json(personas)
+    let unico_nombre = persons.filter((persona)=>{if (persona.name == personas.name) {
+        return true        
+    }})
+    let unico_celular =  persons.filter((persona)=>{if (persona.number == personas.number) {
+        return true
+        
+    }})
+    if (unico_nombre.length == 0 && unico_celular == 0) {
+        persons.push(personas)
+        response.json(personas)
+    }else{
+        response.status(404).end()
+    }
+    
     
 })
 
