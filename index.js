@@ -20,6 +20,13 @@ app.get('/api/persons/:id', (request,response)=>{
         console.log("Hola")
       }
 })
+app.delete('/api/persons/:id', (request,response)=>{
+    persons = persons.filter((persona)=>{if (persona.id != request.params.id) {
+        return true
+        
+    }})
+    response.status(204).end()
+})
 
 
 
